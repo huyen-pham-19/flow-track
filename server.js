@@ -13,6 +13,14 @@ const DB_FILE = path.join(__dirname, "users.json");
 app.use(cors());
 app.use(express.json());
 
+const path = require("path");
+
+app.use(express.static(__dirname));
+
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "index.html"));
+});
+
 function ensureDbFile() {
   if (!fs.existsSync(DB_FILE)) {
     fs.writeFileSync(DB_FILE, JSON.stringify({ users: [] }, null, 2), "utf8");

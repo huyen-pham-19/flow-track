@@ -2,8 +2,7 @@ const FlowTrackAuth = (() => {
   const TOKEN_KEY = "flowtrack-token";
   const USER_KEY = "flowtrack-current-user";
   const STORAGE_PREFIX = "flowtrack-v5";
-  const API_BASE_URL = "http://localhost:3000/api";
-
+  const API_BASE_URL = "/api";
   let hooks = {
     onLogin: null,
     onLogout: null
