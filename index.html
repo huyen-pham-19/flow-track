@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FlowTrack</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="auth.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-theme="dark">
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">F</div>
+        <div>
+          <h1>FlowTrack</h1>
+          <p>Personal work tracker</p>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <button class="nav-btn active" data-page="board">
+          <span>▣</span>
+          <span>Board</span>
+        </button>
+        <button class="nav-btn" data-page="calendar">
+          <span>☷</span>
+          <span>Calendar</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-card">
+        <div class="sidebar-card-label">This week</div>
+        <div class="sidebar-card-value" id="totalTasksStat">0</div>
+        <div class="sidebar-card-sub">Tasks scheduled</div>
+      </div>
+
+      <div class="sidebar-card">
+        <div class="sidebar-card-label">Focus time</div>
+        <div class="sidebar-card-value" id="totalDurationStat">0h</div>
+        <div class="sidebar-card-sub">Planned duration</div>
+      </div>
+
+      <div class="sidebar-footer">
+        <button id="themeToggleBtn" class="ghost-btn" type="button">Toggle theme</button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <h2 id="pageTitle">Board</h2>
+        </div>
+
+        <div class="topbar-actions">
+          <label class="search">
+            <span>⌕</span>
+            <input id="searchInput" type="text" placeholder="Search task..." />
+          </label>
+          <button id="addTaskQuickBtn" class="primary-btn" type="button">+ Add task</button>
+        </div>
+      </header>
+
+      <section id="boardPage" class="page active">
+        <div class="board-hero">
+          <div>
+            <h3>Personal board</h3>
+            <p>There is only one thing that makes a dream impossible to achieve: the fear of failure.</p>
+          </div>
+          <div class="hero-stats">
+            <div class="stat-chip">
+              <span>Lists</span>
+              <strong id="listCount">0</strong>
+            </div>
+            <div class="stat-chip">
+              <span>Tasks</span>
+              <strong id="taskCount">0</strong>
+            </div>
+            <div class="stat-chip">
+              <span>Done</span>
+              <strong id="doneCount">0</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="board-toolbar">
+          <div class="segmented">
+            <button class="segmented-btn active" data-filter="all" type="button">All</button>
+            <button class="segmented-btn" data-filter="todo" type="button">To do</button>
+            <button class="segmented-btn" data-filter="doing" type="button">Doing</button>
+            <button class="segmented-btn" data-filter="done" type="button">Done</button>
+          </div>
+          <button id="addColumnBtn" class="ghost-btn" type="button">+ Add column</button>
+        </div>
+
+        <div id="board" class="board"></div>
+      </section>
+
+      <section id="calendarPage" class="page">
+        <div class="calendar-header">
+          <div class="calendar-nav">
+            <button id="prevPeriodBtn" class="ghost-btn" type="button">←</button>
+            <button id="todayBtn" class="ghost-btn" type="button">Today</button>
+            <button id="nextPeriodBtn" class="ghost-btn" type="button">→</button>
+          </div>
+
+          <h3 id="calendarTitle">This week</h3>
+
+          <div class="segmented">
+            <button class="calendar-view-btn active" data-view="week" type="button">Week</button>
+            <button class="calendar-view-btn" data-view="day" type="button">Day</button>
+          </div>
+        </div>
+
+        <div class="calendar-summary">
+          <div class="summary-card">
+            <span>Scheduled tasks</span>
+            <strong id="calendarTaskCount">0</strong>
+          </div>
+          <div class="summary-card">
+            <span>Total duration</span>
+            <strong id="calendarDurationCount">0h</strong>
+          </div>
+        </div>
+
+        <div id="calendar" class="calendar"></div>
+      </section>
+    </main>
+  </div>
+
+  <div id="taskModal" class="modal hidden">
+    <div class="modal-overlay" data-close-modal="true"></div>
+    <div class="modal-card">
+      <div class="modal-head">
+        <h3 id="modalTitleText">Task details</h3>
+        <button class="icon-btn" type="button" data-close-modal="true">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="field">
+          <label for="taskTitle">Title</label>
+          <input id="taskTitle" type="text" placeholder="Task title" />
+        </div>
+
+        <div class="field">
+          <label for="taskDescription">Description</label>
+          <textarea id="taskDescription" rows="4" placeholder="Write a short description"></textarea>
+        </div>
+
+        <div class="grid-2">
+          <div class="field">
+            <label for="taskStatus">Status</label>
+            <select id="taskStatus"></select>
+          </div>
+          <div class="field">
+            <label for="taskPriority">Priority</label>
+            <select id="taskPriority">
+              <option value="low">Low</option>
+              <option value="medium">Medium</option>
+              <option value="high">High</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <div class="field">
+            <label for="taskDate">Work date</label>
+            <input id="taskDate" type="date" />
+          </div>
+
+          <div class="field">
+            <label>Start time</label>
+            <div class="time-picker">
+              <select id="taskStartHour"></select>
+              <span>:</span>
+              <select id="taskStartMinute"></select>
+              <select id="taskStartPeriod"></select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="taskDuration">Duration (minutes)</label>
+            <input id="taskDuration" type="number" min="0" placeholder="90" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="taskTags">Tags</label>
+          <input id="taskTags" type="text" placeholder="design, deep work, client" />
+          <small>Separate tags with commas</small>
+        </div>
+      </div>
+
+      <div class="modal-foot">
+        <button id="deleteTaskBtn" class="danger-btn" type="button">Delete</button>
+        <button id="saveTaskBtn" class="primary-btn" type="button">Save task</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="auth.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

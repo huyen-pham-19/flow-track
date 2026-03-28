@@ -1,0 +1,70 @@
+{
+  "users": [
+    {
+      "id": "c1euag3i",
+      "name": "Kitty",
+      "email": "huiencute1911@gmai.com",
+      "passwordHash": "$2b$10$e0T.WPYrr6wSf9XA3F4Xee3fdunlAR1ZQas/AXhHQefI7vwCYKPS2",
+      "createdAt": "2026-03-28T14:26:14.974Z"
+    },
+    {
+      "id": "l2gi6c7r",
+      "name": "huyen",
+      "email": "huiencute19@gmail.com",
+      "passwordHash": "$2b$10$SiGBKjSyRSZxWgqMn9eAE.7j7r7.nWCxqi8DzLNNYc/itI0f2/2mC",
+      "createdAt": "2026-03-28T14:26:43.099Z",
+      "appState": {
+        "theme": "dark",
+        "activePage": "board",
+        "boardFilter": "all",
+        "calendarView": "week",
+        "calendarDate": "2026-03-28",
+        "columns": [
+          {
+            "id": "todo",
+            "title": "To Do",
+            "color": "#f25ad4"
+          },
+          {
+            "id": "doing",
+            "title": "Doing",
+            "color": "#8b5cf6"
+          },
+          {
+            "id": "done",
+            "title": "Done",
+            "color": "#27c281"
+          }
+        ],
+        "tasks": [
+          {
+            "id": "4ovhnult",
+            "title": "Review CV",
+            "description": "",
+            "status": "doing",
+            "priority": "medium",
+            "date": "",
+            "startTime": "09:00",
+            "duration": 0,
+            "tags": [],
+            "completedAt": null,
+            "createdAt": "2026-03-28T15:15:48.871Z"
+          },
+          {
+            "id": "c5fzdebk",
+            "title": "Ielts class",
+            "description": "",
+            "status": "todo",
+            "priority": "medium",
+            "date": "",
+            "startTime": "09:00",
+            "duration": 0,
+            "tags": [],
+            "completedAt": null,
+            "createdAt": "2026-03-28T15:06:26.542Z"
+          }
+        ]
+      }
+    }
+  ]
+}
